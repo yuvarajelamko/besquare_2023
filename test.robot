@@ -14,7 +14,6 @@ ${deriv_life}    //*[text()="deriv life"]//parent::div
 
 # Footer
 ${youtube}    //a[@href="https://www.youtube.com/@derivlife"]
-# cheat sheet - ${youtube}    //a[@href="https://www.youtube.com/@deriv"]
 ${reddit}    //a[@href="https://www.reddit.com/user/Deriv_official/"]
 ${telegram}    //a[@href="https://t.me/derivdotcomofficial"]
 ${facebook}    //a[@href="https://www.facebook.com/derivdotcom"]
@@ -67,10 +66,8 @@ Go To Swap Calculator
     Wait until page contains element    //h1[text()="Swap Calculator"]
 Open Trade Menu
     Click Element    //p[text()="Trade"] 
-    # cheat sheet   Mouse Over    //p[text()="Trade"] 
     Wait Until Page Contains     Trade types
     Mouse Over    //p[text()="Trade"]
-    # cheat sheet - Wait Until Page Contains Element   //div[contains(@class,"card__NavContent")]//span[text()="options"]    30
 Open About US Menu
     Click Element    //button[@id="radix-5-trigger-_t_About us_t_"]
     Wait Until Page Contains Element   //a[@href="/who-we-are/"]    30
@@ -95,7 +92,6 @@ Check Trading Platforms
     Page Should Contain Element    ${deriv_trader}
     Page Should Contain    A whole new trading experience on a powerful yet easy to use platform.
     Page Should Not Contain Element    ${deriv_go}
-    #cheat sheet     Page Should Contain Element    ${deriv_go}
     Page Should Contain    Trade multipliers on forex, cryptocurrencies, and synthetic indices with our mobile app.
     Page Should Contain Element    ${deriv_bot}
     Page Should Contain    Automated trading at your fingertips. No coding needed.
@@ -115,7 +111,6 @@ Switch To Financial
 
 Check Swap Charge
      ${expected_swap}=    Evaluate    100*100000*10*0.5 
-     # cheat sheet - ${expected_swap} = 	Evaluate		"{:,.0f}".format(${expected_swap}) 
      Element Text Should Be    //*[text()="USD"]//preceding-sibling::div     ${expected_swap}
 
 *** Test Cases ***
@@ -130,7 +125,6 @@ Check Traders Menu
 Check Deriv Life
     Open About US Menu
     Click Element    ${deriv_life}
-    # cheat sheet    Switch Window    title:Deriv Life
     Page Should Contain    Making an impact that matters
 #check social media link is correct
 Check Social Networks
