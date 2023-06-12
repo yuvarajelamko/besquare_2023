@@ -3,8 +3,8 @@ Library      SeleniumLibrary
 
 *** Variables ***
 
-${MyEmail}          testemail
-${MySecret}			testpassword
+${MyEmail}          yuvaraj@besquare.com.my
+${MySecret}			Yuva@2796
 ${BaseURL}          https://app.deriv.com
 ${Read}             //*[@name='read']//parent::label
 ${Trade}            //*[@name='trade']//parent::label
