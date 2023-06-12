@@ -3,7 +3,7 @@ Documentation  single test for login
 Library  SeleniumLibrary
 
 *** Test Cases ***
-login
+Login
     Open Browser   https://deriv.com    chrome
     Maximize Browser Window
     Wait Until Page Contains Element    //a[@class="live-pricing-section-module--button_table--ff134 link-button primary outlined typography-link typography typography-font-UBUNTU typography-break-word"]   10s    

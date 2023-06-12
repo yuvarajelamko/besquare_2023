@@ -76,7 +76,7 @@ Check Trade Types
     Page Should Contain Element    ${CFDs}
     Page Should Contain    Trade with leverage and tight spreads for better returns on successful trades.
     Page Should Contain Element     ${options}
-    page should contain    Earn a range of payouts without risking more than your initial stake.
+    Page Should Contain    Earn a range of payouts without risking more than your initial stake.
     Page Should Contain Element     ${multiplier}
     Page Should Contain    Get the upside of CFDs without the downside of losing more than your stake.
 
@@ -110,8 +110,9 @@ Switch To Financial
         Click Element    //p[contains(@class,"typography__Text") and text()="Financial"]
 
 Check Swap Charge
-     ${expected_swap}=    Evaluate    100*100000*10*0.5 
-     Element Text Should Be    //*[text()="USD"]//preceding-sibling::div     ${expected_swap}
+     ${expected_swap}=    Evaluate    100*100000*10*0.5
+     ${expected_swap}     Evaluate    "{:,.0f}".format(${expected_swap}) 
+     SeleniumLibrary.Element Text Should Be    //*[text()="USD"]//preceding-sibling::div     ${expected_swap}
 
 *** Test Cases ***
 #check all trade types and paltforms exist in the main page
