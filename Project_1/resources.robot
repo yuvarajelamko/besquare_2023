@@ -14,12 +14,24 @@ ${Admin}            //*[@name='admin']//parent::label
 ${TokenInput}       //*[@class="dc-input__field"]
 ${ConfirmButton}    //*[@class="dc-btn dc-btn__effect dc-btn--primary dc-btn__large dc-btn__button-group da-api-token__button"]
 ${DeleteConfirmation}   //*[@class="dc-btn dc-btn__effect dc-btn--primary dc-btn__large dc-dialog__button"]
+${TestAPIURL}   https://api.deriv.com/api-explorer#authorize
+${TestAPIInput}   //*[@id="playground-request"]
+${TestAPIConfirmation}   //*[@class="c-hZhDRo c-hZhDRo-dVVGEb-size-medium c-hZhDRo-iSclJx-color-primary"]
+${APITestLink}
+${APIMenuLink}   https://app.deriv.com/account/api-token
 
 *** Keywords ***
 
 Clear Input Field
     [Arguments]   @{inputfield}
     Press Keys   ${inputfield}   CTRL+a+BACKSPACE
+
+Paste API Field
+    [Arguments]   @{inputfield}
+    Press Keys   ${inputfield}   {"authorize":"
+    Press Keys   ${inputfield}    CTRL+v 
+    Press Keys   ${inputfield}   "}
+
 Login
     Open Browser   ${BaseURL}     chrome
     Maximize Browser Window
