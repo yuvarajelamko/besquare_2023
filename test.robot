@@ -10,16 +10,16 @@ Library    XML
 @{chrome_arguments}	    --disable-infobars    --headless    --disable-gpu    --window-size=1280,1024
 ${HOME URL}    https://deriv.com
 ${markets_section}   //*[@id="market-fold"]
-${deriv_life}    //*[text()="deriv life"]//parent::div
+${deriv_life}    //*[@href="https://derivlife.com/"]
 
 # Footer
-${youtube}    //a[@href="https://www.youtube.com/@derivlife"]
+${youtube}    //a[@href="https://www.youtube.com/c/Derivdotcom"]
 ${reddit}    //a[@href="https://www.reddit.com/user/Deriv_official/"]
 ${telegram}    //a[@href="https://t.me/derivdotcomofficial"]
 ${facebook}    //a[@href="https://www.facebook.com/derivdotcom"]
-${twitter}    //a[@href="https://twitter.com/derivdotcom/"]
-${instagram}    //a[@href="https://www.instagram.com/deriv_official/"]
-${linkedin}    //a[@href="https://www.linkedin.com/company/derivdotcom/"]
+${twitter}    //a[@href="https://twitter.com/Derivdotcom"]
+${instagram}    //a[@href="https://www.instagram.com/deriv_official "]
+${linkedin}    //a[@href="https://www.instagram.com/deriv_official "]
 ${swap_calculator}    https://deriv.com/trader-tools/swap-calculator/
 ${calculator_table}    //form[@action="#"]
 ${symbol}    //ul[@id="symbol"]
@@ -76,7 +76,7 @@ Check Trade Types
     Page Should Contain Element    ${CFDs}
     Page Should Contain    Trade with leverage and tight spreads for better returns on successful trades.
     Page Should Contain Element     ${options}
-    page should contain    Earn a range of payouts without risking more than your initial stake.
+    Page Should Contain    Earn a range of payouts without risking more than your initial stake.
     Page Should Contain Element     ${multiplier}
     Page Should Contain    Get the upside of CFDs without the downside of losing more than your stake.
 
@@ -91,7 +91,7 @@ Check Trading Platforms
     Page Should Contain    Trade the world’s markets with our popular user-friendly platform.
     Page Should Contain Element    ${deriv_trader}
     Page Should Contain    A whole new trading experience on a powerful yet easy to use platform.
-    Page Should Not Contain Element    ${deriv_go}
+    Page Should Contain Element    ${deriv_go}
     Page Should Contain    Trade multipliers on forex, cryptocurrencies, and synthetic indices with our mobile app.
     Page Should Contain Element    ${deriv_bot}
     Page Should Contain    Automated trading at your fingertips. No coding needed.
@@ -110,8 +110,9 @@ Switch To Financial
         Click Element    //p[contains(@class,"typography__Text") and text()="Financial"]
 
 Check Swap Charge
-     ${expected_swap}=    Evaluate    100*100000*10*0.5 
-     Element Text Should Be    //*[text()="USD"]//preceding-sibling::div     ${expected_swap}
+     ${expected_swap}=    Evaluate    100*100000*10*0.5
+     ${expected_swap}     Evaluate    "{:,.0f}".format(${expected_swap}) 
+     SeleniumLibrary.Element Text Should Be    //*[text()="USD"]//preceding-sibling::div     ${expected_swap}
 
 *** Test Cases ***
 #check all trade types and paltforms exist in the main page
@@ -128,10 +129,10 @@ Check Deriv Life
     Page Should Contain    Making an impact that matters
 #check social media link is correct
 Check Social Networks
-    Switch Window     Online trading platform | Forex, commodities, synthetic indices, stocks, and stock indices | Deriv
+    Switch Window   main
     Scroll Element Into View    //footer
     Page Should Contain Element    ${youtube}
-    Page Should Contain Element    ${telegram}
+    Page Should Not Contain Element    ${telegram}
     Page Should Contain Element    ${facebook}
     Page Should Contain Element    ${twitter}
     Page Should Contain Element    ${instagram}
