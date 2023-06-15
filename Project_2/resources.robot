@@ -24,14 +24,16 @@ ${GoBackButton}          //*[@class="account-closure-warning-modal"]//button[1]
 
 
 ${ConfirmationModal}     //*[@class="account-closure-warning-modal"]
+${ReactivationScreen}    //*[@class="reactivate-title"]
 
 #Error Catching
 ${NoReason}    //*[contains(text(),'Please select at least one reason')]
-${InputContainsSymbol}    //*[contains(text(),'Please select at least one reason')]
+${InputContainsSymbol}    //*[contains(text(),'Must be numbers, letters, and special characters')]
 ${CheckboxDisabled}   //*[@class="dc-checkbox__box dc-checkbox__box--disabled"]
 ${ZeroCharactersLeft}  //*[@class="dc-text closing-account-reasons__hint" and contains(text(), 'Remaining characters: 0')]
 
 ${LongText}   TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTe
+   
 
 *** Keywords ***
 
@@ -46,8 +48,8 @@ Login
     Click Element    //button[@name="login"]
 
 ReLogin
-    Sleep  10s
-    Wait Until Page Contains Element    dm-nav-login-button    20
+    Sleep  12s
+    Wait Until Element Is Enabled    dm-nav-login-button    20
     Click Element   dm-nav-login-button
     Wait Until Page Contains Element    txtEmail     10
     Input Text   txtEmail   ${MyEmail}
@@ -74,3 +76,11 @@ Select 3 Reasons for Account Deletion
     Click Element   ${FinancialOption}
     Click Element   ${StopTradingOption}
     Click Element   ${InterestOption}
+
+Reactive
+    Click Element   //*[@id="btnGrant"]
+    Wait Until Page Contains Element    //*[@href="/account/personal-details"]    10
+
+Reactivate
+    ${IsElementVisible}=  Run Keyword And Return Status    Element Should Be Visible   ${ReactivationScreen}
+    Run Keyword If    ${IsElementVisible}  Reactive

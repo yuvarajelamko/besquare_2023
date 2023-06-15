@@ -3,17 +3,20 @@ Documentation  resources file
 Library  SeleniumLibrary
 
 *** Variables ***
-${MyEmail}          myemail
-${MySecret}			mypassword
-${BaseURL}          https://app.deriv.com
-${duration}         2
-${payout}           15.50
-${stake}            10
-${barrier}          -0.2
-${TradeType}        Forex
-${TradeTypeSelection}  @class="sc-mcd__filter__subgroups-item sc-mcd__filter__item--active sc-mcd__filter__item--selected"
-${ContractType}     //*[@id="dt_contract_high_low_item"]
-${MarketType}       //*[@class="ic-frx ic-frxAUDUSD"]
+${MyEmail}              myemail
+${MySecret}			    mypassword
+${BaseURL}              https://app.deriv.com
+${duration}             2
+${payout}               15.50
+${stake}                10
+${barrier}              -0.2
+${TradeType}            Forex
+${TradeTypeSelection}      @class="sc-mcd__filter__subgroups-item sc-mcd__filter__item--active sc-mcd__filter__item--selected"
+${ContractType}         //*[@id="dt_contract_high_low_item"]
+${MarketType}           //*[@class="ic-frx ic-frxAUDUSD"]
+${StakeInput}           //*[@id='dt_amount_input']
+${PurchaseCall}         //*[@id="dt_purchase_call_button"]
+${PurchasePut}          //*[@id='dt_purchase_put_button']
 
 *** Keywords ***
 Clear Input Field
@@ -37,9 +40,9 @@ Switch to virtual account
     Wait Until Element Is Visible    //*[contains(text(),'demo') and @class='dc-text demo-account-card__title' ]
 
 Enter Deriv Trader
-    Wait Until Element Is Visible    //*[@class="dc-btn dc-btn--primary"][1]   10
-    Click Element    //*[@class="dc-btn dc-btn--primary"][1]
-    Sleep  10s
+    Wait Until Element Is Visible    //a[@href="/"]   10
+    Click Element    //a[@href="/"]
+    Sleep  5s
 
 Select Underlying
     Wait Until Element Is Visible    //*[@class="ic-icon cq-symbol-dropdown"]    20
@@ -52,6 +55,7 @@ Select Underlying
     Click Element    ${MarketType}
 
 Select Contract Type
+    Sleep   5s
     Wait Until Element Is Visible    //*[@data-testid="dt_contract_dropdown"]   10
     Click Element    //*[@data-testid="dt_contract_dropdown"]
     Wait Until Element Is Visible   ${ContractType}
@@ -81,12 +85,19 @@ Set Barrier
 Set Stake
     Wait Until Element Is Visible    //*[@id="dc_stake_toggle_item"]
     Click Element    //*[@id="dc_stake_toggle_item"]
-    Wait Until Element Is Visible    //*[@id='dt_amount_input']
-    Clear Input Field   //*[@id='dt_amount_input'] 
-    Input Text    //*[@id='dt_amount_input']    ${stake}
+    Wait Until Element Is Visible    ${StakeInput}
+    Clear Input Field   ${StakeInput} 
+    Input Text    ${StakeInput}    ${stake}
 
-Click Purchase Button
-    Wait Until Element Is Visible    //*[@id='dt_purchase_put_button']
+Set Stake (without toggle)
+    [Arguments]    ${stake}
+    Wait Until Element Is Visible    ${StakeInput}
+    Clear Input Field   ${StakeInput} 
+    Input Text    ${StakeInput}    ${stake}
+
+
+Click Purchase Button (Lower)
+    Wait Until Element Is Visible    ${PurchasePut} 
     Wait Until Element Is Visible   //*[@class="trade-container__price-info-currency"]
-    Click Element    //*[@id='dt_purchase_put_button']
+    Click Element    ${PurchasePut} 
     Wait Until Page Contains Element    //*[@data-testid="dt_span" and contains(text(),'${payout}')]   30

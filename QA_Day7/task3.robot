@@ -21,6 +21,6 @@ Buy Lower Contract
     Select Contract Type
     Select Duration
     Set Payout    
-    Click Purchase Button
+    Click Purchase Button (Lower)
 
     

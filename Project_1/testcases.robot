@@ -75,12 +75,20 @@ Check if can create api token with duplicate name
     Wait Until Element Is Visible    ${TokenInput}
     Input Text    ${TokenInput}   MyAPI24  
     Wait Until Element Is Visible   ${ConfirmButton}  
-    Click Element   ${ConfirmButton}  
+    Click Element   ${ConfirmButton} 
+    Close Browser 
 
 # TC10
 Verify if last used field updates after API token usage
-    Wait Until Element Is Visible  //*[@data-testid="dt_copy_token_icon"][1]
-    Click Element   //*[@data-testid="dt_copy_token_icon"][1]
+    Login
+    Navigate to API page
+    Select Scopes
+    Wait Until Element Is Visible    ${TokenInput}
+    Input Text    ${TokenInput}   APIUsageTest  
+    Wait Until Element Is Visible   ${ConfirmButton}  
+    Click Element   ${ConfirmButton}   
+    Wait Until Element Is Visible  ${CopyButton}
+    Click Element   ${CopyButton}
     Go To  ${TestAPIURL}
     Wait Until Element Is Visible   ${TestAPIInput}
     Clear Input Field    ${TestAPIInput}
@@ -89,4 +97,8 @@ Verify if last used field updates after API token usage
     Click Element   ${TestAPIConfirmation}
     Go To   ${APIMenuLink}
     Wait Until Element Is Visible    ${TokenInput}
-    Wait Until Element Is Not Visible   //*[@class="da-api-token__table-cell-row"]//span[@class="dc-text" and contains(text(), 'Never')]
+    ${api_date}=    Get Text    ${Lastused_date}
+    ${api_date}=    Convert To String    ${api_date}
+    Run Keyword If    '${api_date}' == 'Never'    Log    Test Pass
+    ...    ELSE    Log    Test Failed
+

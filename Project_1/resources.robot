@@ -12,13 +12,18 @@ ${Payments}         //*[@name='payments']//parent::label
 ${TradingInfo}      //*[@name='trading_information']//parent::label
 ${Admin}            //*[@name='admin']//parent::label
 ${TokenInput}       //*[@class="dc-input__field"]
+
+${CopyButton}       //*[@class="da-api-token__table-cell-row"]//*[@data-testid="dt_copy_token_icon"]
 ${ConfirmButton}    //*[@class="dc-btn dc-btn__effect dc-btn--primary dc-btn__large dc-btn__button-group da-api-token__button"]
 ${DeleteConfirmation}   //*[@class="dc-btn dc-btn__effect dc-btn--primary dc-btn__large dc-dialog__button"]
-${TestAPIURL}   https://api.deriv.com/api-explorer#authorize
-${TestAPIInput}   //*[@id="playground-request"]
+
+${TestAPIURL}            https://api.deriv.com/api-explorer#authorize
+${TestAPIInput}          //*[@id="playground-request"]
 ${TestAPIConfirmation}   //*[@class="c-hZhDRo c-hZhDRo-dVVGEb-size-medium c-hZhDRo-iSclJx-color-primary"]
-${APITestLink}
-${APIMenuLink}   https://app.deriv.com/account/api-token
+
+${APIMenuLink}           https://app.deriv.com/account/api-token
+
+${Lastused_date}         //tr[@class="da-api-token__table-cell-row"]//self::tr//span[@class="dc-text"]//following::span
 
 *** Keywords ***
 
