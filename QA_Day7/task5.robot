@@ -4,8 +4,6 @@ Library  SeleniumLibrary
 Resource    resources.robot
 
 *** Variables ***
-${MyEmail}          yuvaraj@besquare.com.my
-${MySecret}			Yuva@2796
 ${BaseURL}          https://app.deriv.com
 ${duration}         2
 ${stake}           10
